@@ -27,23 +27,25 @@ router.get("/:id",
     handleInputErrors,
     ProjectController.getProjectById)
 
-router.put("/:id", 
-    param("id").isMongoId().withMessage("ID no válido"),
-    body("projectName").notEmpty().withMessage("El nombre del Proyecto es Obligatorio"),
-    body("clientName").notEmpty().withMessage("El nombre del Cliente es Obligatorio"),
-    body("description").notEmpty().withMessage("La descripción del Proyecto es Obligatoria"),
-    handleInputErrors,
-    ProjectController.updateProject)
-
-router.delete("/:id", 
-        param("id").isMongoId().withMessage("ID no válido"),
-        handleInputErrors,
-        ProjectController.deleteProject)
-
 //Rutas para las tareas
 
 //Optimizacion del codigo, ejecuta validateProjectExists siempre que exista projectId y se ejecuta siempre de primero
 router.param("projectId", projectExists)
+
+router.put("/:projectId", 
+    param("projectId").isMongoId().withMessage("ID no válido"),
+    body("projectName").notEmpty().withMessage("El nombre del Proyecto es Obligatorio"),
+    body("clientName").notEmpty().withMessage("El nombre del Cliente es Obligatorio"),
+    body("description").notEmpty().withMessage("La descripción del Proyecto es Obligatoria"),
+    handleInputErrors,
+    hasAuthorization,
+    ProjectController.updateProject)
+
+router.delete("/:projectId", 
+        param("projectId").isMongoId().withMessage("ID no válido"),
+        handleInputErrors,
+        hasAuthorization,
+        ProjectController.deleteProject)
 
 router.post("/:projectId/tasks",
     hasAuthorization,
