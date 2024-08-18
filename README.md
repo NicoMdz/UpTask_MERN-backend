@@ -13,7 +13,10 @@ Aplicación dirigida a cualquier usuario que desee llevar un administración tot
 * **Nodemailer:** Para servicio de emails
 * **JSON Web Token:** Para autenticación y autorización
 
+### Usuario Prueba:
 
+* **Correo:** correo@prueba.com
+* **Contraseña:** 12345678
 
 ---
 **Créditos:** Juan Pablo de la Torre Vázquez <br>
